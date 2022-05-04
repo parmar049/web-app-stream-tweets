@@ -48,7 +48,22 @@
 
 		stompClient.connect({}, function(frame) {
 		stompClient.subscribe('/topic/tweets', function(tweets) {
-		    console.log(tweets);
+		    console.log(tweets.body);
+            const tweet = JSON.parse(tweets.body);
+            const tweetData = {
+            id: tweet.data.id,
+            text: tweet.data.text
+        }
+        const tweetEl = document.createElement('div')
+        tweetEl.className = 'card my-4'
+        tweetEl.innerHTML = `
+            <div class="card-body">
+                <h5 class="card-title">${tweetData.text}</h5>
+            </div>
+        `
+
+        tweetStream.appendChild(tweetEl)
+
 		    });
 		});
     });
