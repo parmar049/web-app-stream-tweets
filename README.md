@@ -13,7 +13,7 @@ pushing to kafka topics. This project works as Kafka consumer and listener will 
 
 ###### Current Project Scope
 
-![Alt text](src/main/resources/documents/project-scope.png "Project-Scope")
+![Alt text](src/main/resources/documents/Project-Scope.png "Project-Scope")
 
 ###### **Prerequisite**
 
