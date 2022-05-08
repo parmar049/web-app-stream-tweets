@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
@@ -26,6 +27,13 @@
 <body>
 <nav class="navbar navbar-dark bg-dark">
     <div class="container">
+        <form class="navbar-search pull-left">
+            <div class="item">
+                <img src="twitter-logo.png">
+            </div>
+            <input type="text" class="search-query" id="tweetSearch" placeholder="Search">
+            <button type="submit" class="btn btn-primary" onclick="myFunction()">Search</button>
+        </form>
         <a href="#" class="navbar-brand">Real-Time Tweet Stream</a>
     </div>
 </nav>
@@ -68,6 +76,15 @@
 		});
     });
 
+    function streamTweets() {
+    const request = new XMLHttpRequest();
+    if ($('#tweetSearch').val() == '') {
+        return false;
+    }
+    const url = 'localhost:8081/coopX/v1/streamTweets/produceDataStream?ruleFilter=' + $('#tweetSearch').val();;
+    request.open("GET", url);
+    request.send();
+    }
 
 
 </script>
