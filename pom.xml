@@ -84,6 +84,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>kafka-tweet-stream-consumer</finalName>
 	</build>
 
 </project>
