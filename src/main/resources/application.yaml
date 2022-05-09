@@ -6,8 +6,11 @@ spring:
     topic:
       name: tweets
     consumer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: 52.208.71.79:9092
       group-id: twitter
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
+producer:
+  host: http://localhost:8081
+  relativePath: /coopX/v1/streamTweets/produceDataStream?ruleFilter=

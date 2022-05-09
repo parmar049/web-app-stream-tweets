@@ -22,6 +22,7 @@
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script src="main.js"></script>
     <title>Real-Time Tweet Stream</title>
 </head>
 <body>
@@ -32,7 +33,7 @@
                 <img src="twitter-logo.png">
             </div>
             <input type="text" class="search-query" id="tweetSearch" placeholder="Search">
-            <button type="submit" class="btn btn-primary" onclick="myFunction()">Search</button>
+            <button type="submit" class="btn btn-primary" onclick="streamTweets()">Search</button>
         </form>
         <a href="#" class="navbar-brand">Real-Time Tweet Stream</a>
     </div>
@@ -48,45 +49,5 @@
         crossorigin="anonymous"
 ></script>
 
-<script>
-    var stompClient;
-    $(document).ready(function() {
-        var socket = new SockJS('/live-tweet-stream');
-        stompClient = Stomp.over(socket);
-
-		stompClient.connect({}, function(frame) {
-		stompClient.subscribe('/topic/tweets', function(tweets) {
-		    console.log(tweets.body);
-            const tweet = JSON.parse(tweets.body);
-            const tweetData = {
-            id: tweet.data.id,
-            text: tweet.data.text
-        }
-        const tweetEl = document.createElement('div')
-        tweetEl.className = 'card my-4'
-        tweetEl.innerHTML = `
-            <div class="card-body">
-                <h5 class="card-title">${tweetData.text}</h5>
-            </div>
-        `
-
-        tweetStream.appendChild(tweetEl)
-
-		    });
-		});
-    });
-
-    function streamTweets() {
-    const request = new XMLHttpRequest();
-    if ($('#tweetSearch').val() == '') {
-        return false;
-    }
-    const url = 'localhost:8081/coopX/v1/streamTweets/produceDataStream?ruleFilter=' + $('#tweetSearch').val();;
-    request.open("GET", url);
-    request.send();
-    }
-
-
-</script>
 </body>
 </html>
